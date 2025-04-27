@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stick It - E-commerce</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <div class="container">
+<h1 class="logo"><img src="./download (1).png" alt="Logo" class="small-logo" /> Stick It</h1>
+            <nav>
+            <ul class="nav-links">
+                <li><a href="#products">Products</a></li>
+                <li><a href="#cart">Cart (<span id="cart-count">0</span>)</a></li>
+                <li><a href="#" id="login-link">Login / Signup</a></li>
+            </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="products" class="container">
+            <h2>Our Stickers</h2>
+            <div class="product-grid" id="product-grid" style="grid-template-columns: 1fr;">
+<div class="product-card">
+    <img src="./download (1).jpg" alt="Sticker 1" class="product-image" />
+    <h3 class="product-title">Sticker 1</h3>
+    <p class="product-price">$5.99</p>
+    <button class="add-to-cart-btn" data-id="101">Add to Cart</button>
+</div>
+<div class="product-card">
+    <img src="./images.jpg" alt="Sticker 2" class="product-image" />
+    <h3 class="product-title">Sticker 2</h3>
+    <p class="product-price">$6.99</p>
+    <button class="add-to-cart-btn" data-id="102">Add to Cart</button>
+</div>
+<div class="product-card">
+    <img src="./download (1).jpg" alt="Sticker 3" class="product-image" />
+    <h3 class="product-title">Sticker 3</h3>
+    <p class="product-price">$4.99</p>
+    <button class="add-to-cart-btn" data-id="103">Add to Cart</button>
+</div>
+<div class="product-card">
+    <img src="./download.jpg" alt="Sticker 4" class="product-image" />
+    <h3 class="product-title">Sticker 4</h3>
+    <p class="product-price">$7.99</p>
+    <button class="add-to-cart-btn" data-id="104">Add to Cart</button>
+</div>
+<div class="product-card">
+    <img src="./download (1).png" alt="Sticker 5" class="product-image" />
+    <h3 class="product-title">Sticker 5</h3>
+    <p class="product-price">$8.99</p>
+    <button class="add-to-cart-btn" data-id="105">Add to Cart</button>
+</div>
+            </div>
+        </section>
+
+        <section id="cart" class="container">
+            <h2>Your Cart</h2>
+            <div id="cart-items">
+                <p>Your cart is empty.</p>
+            </div>
+            <div id="cart-total" class="cart-total"></div>
+            <button id="checkout-btn" class="checkout-btn" disabled>Checkout</button>
+        </section>
+    </main>
+
+    <!-- Login/Signup Modal -->
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="modal-close">&times;</span>
+            <div class="auth-tabs">
+                <button id="login-tab" class="active">Login</button>
+                <button id="signup-tab">Sign Up</button>
+            </div>
+            <form id="login-form" class="auth-form active">
+                <h2>Login</h2>
+                <label for="login-email">Email</label>
+                <input type="email" id="login-email" required />
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" required />
+                <button type="submit" class="auth-btn">Login</button>
+            </form>
+            <form id="signup-form" class="auth-form">
+                <h2>Sign Up</h2>
+                <label for="signup-name">Name</label>
+                <input type="text" id="signup-name" required />
+                <label for="signup-email">Email</label>
+                <input type="email" id="signup-email" required />
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" required />
+                <button type="submit" class="auth-btn">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Stick It. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

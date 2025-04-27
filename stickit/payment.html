@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stick It - Payment</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="payment-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/PayPal.svg/2560px-PayPal.svg.png" alt="Payment Logo" class="payment-logo" />
+        <h2>Payment Details</h2>
+        <form id="payment-form" class="payment-form">
+            <div class="payment-methods">
+                <label>
+                    <input type="radio" name="payment-method" value="credit-card" checked />
+                    Credit Card
+                </label>
+                <label>
+                    <input type="radio" name="payment-method" value="upi" />
+                    UPI
+                </label>
+                <label>
+                    <input type="radio" name="payment-method" value="paypal" />
+                    PayPal
+                </label>
+            </div>
+
+            <div id="credit-card-fields" class="payment-fields">
+                <label for="card-name">Name on Card</label>
+                <input type="text" id="card-name" required />
+
+                <label for="card-number">Card Number</label>
+                <input type="text" id="card-number" maxlength="19" placeholder="1234 5678 9012 3456" required />
+
+                <label for="expiry-date">Expiry Date</label>
+                <input type="text" id="expiry-date" maxlength="5" placeholder="MM/YY" required />
+
+                <label for="cvv">CVV</label>
+                <input type="password" id="cvv" maxlength="4" required />
+            </div>
+
+            <div id="upi-fields" class="payment-fields" style="display:none;">
+                <label for="upi-id">UPI ID</label>
+                <input type="text" id="upi-id" placeholder="example@upi" />
+            </div>
+
+            <div id="paypal-fields" class="payment-fields" style="display:none;">
+                <label for="paypal-email">PayPal Email</label>
+                <input type="email" id="paypal-email" placeholder="email@example.com" />
+            </div>
+
+            <button type="submit" class="pay-btn">Pay Now</button>
+        </form>
+    </div>
+
+    <script>
+        const paymentForm = document.getElementById('payment-form');
+        const paymentMethods = document.getElementsByName('payment-method');
+        const creditCardFields = document.getElementById('credit-card-fields');
+        const upiFields = document.getElementById('upi-fields');
+        const paypalFields = document.getElementById('paypal-fields');
+
+        function updatePaymentFields() {
+            const selectedMethod = Array.from(paymentMethods).find(r => r.checked).value;
+            creditCardFields.style.display = selectedMethod === 'credit-card' ? 'block' : 'none';
+            upiFields.style.display = selectedMethod === 'upi' ? 'block' : 'none';
+            paypalFields.style.display = selectedMethod === 'paypal' ? 'block' : 'none';
+        }
+
+        paymentMethods.forEach(radio => {
+            radio.addEventListener('change', updatePaymentFields);
+        });
+
+        updatePaymentFields();
+
+        paymentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Payment successful! Thank you for your purchase.');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
