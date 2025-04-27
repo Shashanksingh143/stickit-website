@@ -8,23 +8,16 @@
 </head>
 <body>
     <div class="payment-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/PayPal.svg/2560px-PayPal.svg.png" alt="Payment Logo" class="payment-logo" />
         <h2>Payment Details</h2>
         <form id="payment-form" class="payment-form">
-            <div class="payment-methods">
-                <label>
-                    <input type="radio" name="payment-method" value="credit-card" checked />
-                    Credit Card
-                </label>
-                <label>
-                    <input type="radio" name="payment-method" value="upi" />
-                    UPI
-                </label>
-                <label>
-                    <input type="radio" name="payment-method" value="paypal" />
-                    PayPal
-                </label>
-            </div>
+            <label for="payment-method-select">Select Payment Method:</label>
+            <select id="payment-method-select" name="payment-method">
+                <option value="credit-card" selected>Credit Card</option>
+                <option value="debit-card">Debit Card</option>
+                <option value="cash-on-delivery">Cash on Delivery</option>
+                <option value="upi">UPI</option>
+                <option value="paypal">PayPal</option>
+            </select>
 
             <div id="credit-card-fields" class="payment-fields">
                 <label for="card-name">Name on Card</label>
@@ -40,6 +33,20 @@
                 <input type="password" id="cvv" maxlength="4" required />
             </div>
 
+            <div id="debit-card-fields" class="payment-fields" style="display:none;">
+                <label for="debit-card-name">Name on Card</label>
+                <input type="text" id="debit-card-name" required />
+
+                <label for="debit-card-number">Card Number</label>
+                <input type="text" id="debit-card-number" maxlength="19" placeholder="1234 5678 9012 3456" required />
+
+                <label for="debit-expiry-date">Expiry Date</label>
+                <input type="text" id="debit-expiry-date" maxlength="5" placeholder="MM/YY" required />
+
+                <label for="debit-cvv">CVV</label>
+                <input type="password" id="debit-cvv" maxlength="4" required />
+            </div>
+
             <div id="upi-fields" class="payment-fields" style="display:none;">
                 <label for="upi-id">UPI ID</label>
                 <input type="text" id="upi-id" placeholder="example@upi" />
@@ -50,27 +57,33 @@
                 <input type="email" id="paypal-email" placeholder="email@example.com" />
             </div>
 
+            <div id="cod-message" class="payment-fields" style="display:none;">
+                <p>Please prepare the exact amount in cash. Our delivery person will collect the payment upon delivery.</p>
+            </div>
+
             <button type="submit" class="pay-btn">Pay Now</button>
         </form>
     </div>
 
     <script>
         const paymentForm = document.getElementById('payment-form');
-        const paymentMethods = document.getElementsByName('payment-method');
+        const paymentMethodSelect = document.getElementById('payment-method-select');
         const creditCardFields = document.getElementById('credit-card-fields');
+        const debitCardFields = document.getElementById('debit-card-fields');
         const upiFields = document.getElementById('upi-fields');
         const paypalFields = document.getElementById('paypal-fields');
+        const codMessage = document.getElementById('cod-message');
 
         function updatePaymentFields() {
-            const selectedMethod = Array.from(paymentMethods).find(r => r.checked).value;
+            const selectedMethod = paymentMethodSelect.value;
             creditCardFields.style.display = selectedMethod === 'credit-card' ? 'block' : 'none';
+            debitCardFields.style.display = selectedMethod === 'debit-card' ? 'block' : 'none';
             upiFields.style.display = selectedMethod === 'upi' ? 'block' : 'none';
             paypalFields.style.display = selectedMethod === 'paypal' ? 'block' : 'none';
+            codMessage.style.display = selectedMethod === 'cash-on-delivery' ? 'block' : 'none';
         }
 
-        paymentMethods.forEach(radio => {
-            radio.addEventListener('change', updatePaymentFields);
-        });
+        paymentMethodSelect.addEventListener('change', updatePaymentFields);
 
         updatePaymentFields();
 
